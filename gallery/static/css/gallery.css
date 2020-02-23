@@ -1,0 +1,24 @@
+img {
+  max-width: 70%;
+  height: auto;
+}
+
+h1 {
+  color: rgb(0, 0, 0);
+  margin: 0px;
+  padding: 0px;
+}
+.post {
+  margin: 20px;
+  padding: 20px;
+  display: grid;
+}
+.home {
+  margin: 30px;
+  padding: 30px;
+  color: peru;
+}
+
+.comment {
+  margin: 20px 0px 20px 20px;
+}

@@ -1,0 +1,8 @@
+*.pyc
+*~
+__pycache__
+gallery-venv
+db.sqlite3
+/static
+/uploads
+.DS_Store
