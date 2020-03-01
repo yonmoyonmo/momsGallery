@@ -9,11 +9,13 @@
     <title>Mom's Gallery</title>
   </head>
   <body>
-    <a class="home" href="{% url 'post_list' %}">Mom's Gallery</a>
-    <h1>New post</h1>
+    <div id="home">
+      <h1><a style="color:black;" href="/">Mom's Gallery</a></h1>
+    </div>
+    <h2>새로운 게시물 작성</h2>
     <form method="POST" class="post-form" enctype="multipart/form-data">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Save</button>
+        {{ form.as_p}}
+        <button type="submit" class="save btn btn-block">Save</button>
     </form>
     </div>
   </body>

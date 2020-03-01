@@ -11,30 +11,48 @@
       rel="stylesheet"
       href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"
     />
+    <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{% static 'css/gallery.css' %}" />
     <title>Mom's Gallery</title>
   </head>
   <body>
-    <a class="home" href="{% url 'post_list' %}">Mom's Gallery</a>
+    <div id="home">
+    <h1>
+      <a style="color:black;"href="{% url 'post_list' %}">Mom's Gallery</a>
+    </h1>
+    </div>
+
     {% if user.is_authenticated %}
-    <a href="{% url 'post_upload' %}">upload</a>
-    <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"
-      ><span class="glyphicon glyphicon-pencil"></span
-    ></a>
-    <a class="btn btn-default" href="{% url 'post_remove' pk=post.pk %}"
-      ><span class="glyphicon glyphicon-remove"></span
-    ></a>
+    <div class="btns">
+      <a class="btn btn-basic"
+        style="background-color: coral; color:black;
+        margin:0px;"
+        href="{% url 'post_upload' %}"><span class="glyphicon glyphicon-plus"></a>
+
+      <a class="btn btn-basic"
+        style="background-color:lightseagreen; color:black;
+        margin:0px;"
+        href="{% url 'post_edit' pk=post.pk %}"
+        ><span class="glyphicon glyphicon-pencil"></span
+      ></a>
+
+      <a class="btn btn-basic"
+        style="background-color:lightskyblue; color:black;
+        margin:0px;" href="{% url 'post_remove' pk=post.pk %}"
+        ><span class="glyphicon glyphicon-trash"></span
+      ></a>
+    </div>
     {% endif %}
-    <div class="post_single">
+
+    <div class="post">
+      <h1 class="title">{{ post.title }}</h1>
       {% if post.pub_date %}
-      <p class="date_single">
+      <p class="date">
         {{ post.pub_date }}
       </p>
       {% endif %}
-
-      <h1>{{ post.title }}</h1>
-      <p>{{ post.author }}</p>
-      <p>{{ post.comment|linebreaksbr }}</p>
+      <p class="author">{{ post.author }}</p>
+      <p class="text_single">{{ post.comment|linebreaksbr }}</p>
       <div class="img_single">
         {%if post.image%}
         <img src="{{ post.image.url }}" />
@@ -42,18 +60,24 @@
       </div>
     </div>
 
-    <hr />
-    <a class="btn btn-default" href="{% url 'add_comment_to_post' pk=post.pk %}"
-      >Add comment</a
-    >
-    {% for comment in post.comments.all %}
     <div class="comment">
-      <div class="date">{{ comment.created_date }}</div>
-      <strong>{{ comment.author }}</strong>
-      <p>{{ comment.text|linebreaks }}</p>
-    </div>
-    {% empty %}
-    <p>No comments here yet</p>
-    {% endfor %}
+      <div class="CB">  
+      <a class="btn btn-basic"
+          style="background-color: rgb(219, 217, 217);
+          color:black; 
+          "
+        href="{% url 'add_comment_to_post' pk=post.pk %}"
+          ><span class="glyphicon glyphicon-pencil"></a>
+          </div>
+      {% for comment in post.comments.all %}
+      <div class="comment_content">
+        <div class="date">{{ comment.created_date }}</div>
+        <strong class="author_comment">{{ comment.author }}</strong>
+        <div class="text_comment">{{ comment.text|linebreaks }}</div>
+      </div>
+      {% empty %}
+      <p>댓글이 없습니다.</p>
+      {% endfor %}
+  </div>
   </body>
 </html>
