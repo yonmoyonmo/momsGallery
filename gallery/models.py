@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
+from django_resized import ResizedImageField
 # Create your models here.
 
 
@@ -17,14 +18,12 @@ def user_path(instance, filename):  # 파라미터 instance는 Photo 모델을 �
 
 class Photo(models.Model):
     title = models.CharField(max_length=200)
-    image = models.ImageField(
-        upload_to=user_path, blank=True, null=True)  # 어디로 업로드 할지 지정
-    # 로그인 한 사용자, many to one relation
+    image = ResizedImageField(
+        upload_to=user_path, quality=25, blank=True, null=True)
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     comment = models.TextField()
     pub_date = models.DateTimeField(timezone.now(), null=True)
-    # 레코드 생성시 현재 시간으로 자동 생성
 
     def __str__(self):
         return self.title
