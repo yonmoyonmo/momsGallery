@@ -21,13 +21,14 @@ from django.conf import settings
 from django.contrib.auth import views
 from graphene_django.views import GraphQLView
 from momsG.schema import schema
+from django.views.decorators.csrf import csrf_exempt
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('gallery.urls')),
 
-    path("graphqlapi", GraphQLView.as_view(graphiql=False, schema=schema)),
+    path(r'graphqlapi/', csrf_exempt(GraphQLView.as_view(graphiql=False, schema=schema))),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
