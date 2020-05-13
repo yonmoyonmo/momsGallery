@@ -28,7 +28,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('gallery.urls')),
 
-    path(r'graphqlapi/', csrf_exempt(GraphQLView.as_view(graphiql=False, schema=schema))),
+    path(r'graphqlapi/', csrf_exempt(GraphQLView.as_view(graphiql=True, schema=schema))),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
